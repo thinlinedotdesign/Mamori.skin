@@ -35,6 +35,7 @@
       font-family:var(--sans); font-size:18px; line-height:1.72;
       -webkit-font-smoothing:antialiased; overflow-x:hidden;
     }
+    html { overflow-x:hidden; }
 
     /* grain */
     body::after {
@@ -141,7 +142,7 @@
     }
     .hero__h1 {
       font-family:var(--serif);
-      font-size:clamp(72px, 10.5vw, 148px);
+      font-size:clamp(40px, 10.5vw, 148px);
       font-weight:600; line-height:.96; letter-spacing:-.02em;
       color:#FFFFFF;
       text-shadow: 0 2px 32px rgba(0,0,0,.45);
@@ -156,7 +157,7 @@
       text-shadow: 0 1px 16px rgba(0,0,0,.5);
     }
     .hero__form {
-      margin-top:52px; display:flex; max-width:540px;
+      margin-top:52px; display:flex; max-width:540px; width:100%;
     }
     .hero__input {
       flex:1; padding:20px 24px;
@@ -191,13 +192,13 @@
 
     /* ── SECTION SHARED ── */
     .section { padding:160px 0; }
-    .section--alt { background:var(--linen-deep); }
+    .section--alt { background:var(--linen-deep); overflow:hidden; }
     .section--dark { background:var(--dark-bg); }
     .section--cream { background:var(--cream); }
 
     .section__title {
       font-family:var(--serif);
-      font-size:clamp(52px, 6.5vw, 88px);
+      font-size:clamp(32px, 6.5vw, 88px);
       font-weight:300; line-height:1.02; letter-spacing:-.015em;
       margin-top:24px; color:var(--ink);
       font-feature-settings:"kern" 1,"liga" 1,"calt" 1;
@@ -220,6 +221,7 @@
     .shift__col-head {
       padding:20px 48px;
       font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+      white-space:nowrap;
     }
     .shift__col-head--before {
       background:var(--linen-deep); color:var(--ink-muted);
@@ -266,7 +268,7 @@
     .shift__icon {
       width:36px; height:36px; border-radius:50%; flex-shrink:0;
       display:flex; align-items:center; justify-content:center;
-      font-size:14px;
+      font-size:14px; min-width:36px;
     }
     .shift__icon--before { background:rgba(107,94,85,.12); color:var(--ink-muted); }
     .shift__icon--after  { background:rgba(155,122,80,.15); color:var(--gold-lt); }
@@ -309,6 +311,7 @@
     .science__spec {
       margin-top:52px; padding:52px 56px;
       background:var(--dark-mid); border-left:4px solid var(--gold);
+      overflow:hidden;
     }
     .science__spec p {
       font-family:var(--serif); font-size:24px; font-style:italic;
@@ -362,6 +365,7 @@
     .founders-stack {
       margin-top:80px;
       border-top:1px solid rgba(155,122,80,.15);
+      overflow:hidden;
     }
     .founder-row {
       display:grid;
@@ -399,7 +403,7 @@
     .founder-row__content { display:flex; flex-direction:column; justify-content:flex-start; }
     .founder-row__meta { margin-bottom:24px; }
     .founder-row__name {
-      font-family:var(--serif); font-size:52px; font-weight:400;
+      font-family:var(--serif); font-size:clamp(24px, 4vw, 52px); font-weight:400;
       line-height:1.0; letter-spacing:-.02em;
       color:#F0E8DC; display:block;
     }
@@ -462,7 +466,7 @@
     .cta__eye::before, .cta__eye::after { content:''; width:56px; height:1px; background:var(--gold); opacity:.35; }
     .cta__h2 {
       font-family:var(--serif);
-      font-size:clamp(52px, 7.5vw, 100px);
+      font-size:clamp(32px, 7.5vw, 100px);
       font-weight:300; line-height:.98; color:#F0E8DC; margin-bottom:24px;
     }
     .cta__h2 em { font-style:italic; color:var(--gold-lt); display:block; }
@@ -470,7 +474,7 @@
       font-family:var(--serif); font-size:22px; font-style:italic;
       color:rgba(228,220,210,.48); max-width:480px; margin:0 auto 60px; line-height:1.7;
     }
-    .cta__form { display:flex; max-width:520px; margin:0 auto; }
+    .cta__form { display:flex; max-width:520px; margin:0 auto; width:100%; }
     .cta__input {
       flex:1; padding:22px 26px;
       background:rgba(255,255,255,.06); border:1px solid rgba(155,122,80,.28); border-right:none;
@@ -503,7 +507,7 @@
       padding-bottom:56px; border-bottom:1px solid rgba(155,122,80,.08);
     }
     .footer__svg { margin-bottom:8px; }
-    .footer__blurb { font-size:15px; line-height:1.9; color:rgba(228,220,210,.3); max-width:340px; }
+    .footer__blurb { font-size:15px; line-height:1.9; color:rgba(228,220,210,.3); max-width:100%; }
     .footer__ct { font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:22px; }
     .footer__links a {
       display:block; font-size:16px; color:rgba(228,220,210,.42);
@@ -535,27 +539,312 @@
     .toast.show { transform:translateY(0); opacity:1; }
 
     /* ── RESPONSIVE ── */
+    
+    /* ═══════════════════════════════════════════════════
+       RESPONSIVE — full system, mobile-first layering
+       1200px → 1024px → 900px → 768px → 640px → 480px → 375px
+       ═══════════════════════════════════════════════════ */
+
+    /* ── 1200px: tighten wrap for mid-wide viewports ── */
+    @media(max-width:1200px) {
+      .wrap { padding:0 52px; }
+      .nav  { padding:20px 52px; }
+      .hero__content { padding:0 52px; }
+      .section__title { font-size:clamp(44px, 5.5vw, 80px); }
+      .founder-row__name { font-size:44px; }
+    }
+
+    /* ── 1024px: large tablet / small laptop ── */
     @media(max-width:1024px) {
       .wrap { padding:0 40px; }
-      .nav { padding:20px 40px; }
+      .nav  { padding:18px 40px; }
       .hero__content { padding:0 40px; }
       .section { padding:120px 0; }
+      .founder-section { padding:120px 0; }
+
+      /* Science: 3→1 col */
       .science__panels { grid-template-columns:1fr; }
+
+      /* Expect: 3→1 col */
       .expect__grid { grid-template-columns:1fr; }
-      .founder__inner { grid-template-columns:1fr; gap:60px; }
-      .founder__portrait { width:260px; height:260px; }
-      .shift__pairs { grid-template-columns:1fr; }
+
+      /* Shift pairs: 2-col stays but narrower */
+      .shift__col-head { padding:18px 32px; }
+      .shift__before,
+      .shift__after   { padding:32px 32px; }
+      .shift__before-text,
+      .shift__after-text { font-size:22px; }
+
+      /* Standard hover: disable negative margin trick on tablet */
+      .standard__item:hover { margin:0; padding:56px 0; }
+
+      /* Footer: 2→1 col */
       .footer__inner { grid-template-columns:1fr; gap:48px; }
+
+      /* Founder: shrink circle + column */
+      .founder-row {
+        grid-template-columns:200px 1fr;
+        gap:48px;
+        padding:64px 0;
+      }
+      .founder-row__circle { width:180px; height:180px; }
+      .founder-row__name   { font-size:38px; }
     }
+
+    /* ── 900px: tablet portrait + large phone landscape ── */
+    @media(max-width:900px) {
+      .wrap { padding:0 32px; }
+      .nav  { padding:16px 32px; }
+      .hero__content { padding:0 32px; }
+      .section { padding:100px 0; }
+      .founder-section { padding:100px 0; }
+
+      /* Shift: collapse to single col */
+      .shift__pairs {
+        grid-template-columns:1fr;
+        gap:2px;
+      }
+      .shift__col-head--before,
+      .shift__col-head--after {
+        display:none; /* headers implied by icons */
+      }
+      .shift__before { text-align:left; }
+      .shift__before-text,
+      .shift__after-text { font-size:21px; }
+
+      /* Founder: stack vertically */
+      .founder-row {
+        grid-template-columns:1fr;
+        gap:36px;
+        padding:60px 0;
+      }
+      .founder-row__photo {
+        flex-direction:row;
+        align-items:center;
+        gap:28px;
+      }
+      .founder-row__circle { width:140px; height:140px; }
+      .founder-row__name   { font-size:36px; }
+      .founder-row__quote  { font-size:24px; }
+
+      /* Standard: simplify */
+      .standard__item { grid-template-columns:64px 1fr; gap:0; }
+      .standard__num  { font-size:48px; }
+      .standard__title { font-size:26px; }
+
+      /* Science spec */
+      .science__spec { padding:36px 32px; }
+      .science__spec p { font-size:20px; }
+
+      /* Expect cards */
+      .expect__card { padding:48px 36px; }
+
+      /* CTA */
+      .cta { padding:100px 0; }
+      .cta__h2 { font-size:clamp(40px, 7vw, 72px); }
+    }
+
+    /* ── 768px: tablet portrait ── */
+    @media(max-width:768px) {
+      .wrap { padding:0 28px; }
+      .nav  { padding:14px 28px; }
+      .hero__content { padding:0 28px; }
+      .nav__mono { width:40px; height:40px; }
+      .nav__mono img { width:40px; height:40px; }
+
+      .section { padding:88px 0; }
+      .founder-section { padding:88px 0; }
+      .section__title { font-size:clamp(36px, 6.5vw, 64px); }
+      .section__body  { font-size:20px; }
+
+      /* Hero */
+      .hero { padding-bottom:72px; }
+      .hero__h1 { font-size:clamp(52px, 11vw, 80px); line-height:.98; }
+      .hero__sub { font-size:18px; max-width:100%; }
+      .hero__form { max-width:100%; }
+
+      /* Shift */
+      .shift__before-text,
+      .shift__after-text { font-size:19px; }
+      .shift__before,
+      .shift__after { padding:28px 28px; }
+      .shift__icon  { width:28px; height:28px; font-size:11px; }
+
+      /* Science panels */
+      .science__panel { padding:48px 32px; }
+      .science__nm    { font-size:30px; }
+      .science__desc  { font-size:16px; }
+
+      /* Founder */
+      .founder-row { padding:52px 0; gap:28px; }
+      .founder-row__circle { width:120px; height:120px; }
+      .founder-row__name   { font-size:32px; }
+      .founder-row__title  { font-size:10px; }
+      .founder-row__quote  { font-size:21px; }
+      .founder-row__body   { font-size:16px; }
+
+      /* Standard */
+      .standard__item { padding:40px 0; }
+      .standard__text { font-size:16px; }
+
+      /* Certs */
+      .certs { gap:8px; }
+      .cert  { font-size:10px; padding:8px 14px; }
+
+      /* Expect */
+      .expect__card { padding:40px 28px; }
+      .expect__card-title { font-size:24px; }
+      .expect__text { font-size:16px; }
+
+      /* CTA */
+      .cta__h2 { font-size:clamp(36px, 8vw, 64px); }
+      .cta__sub { font-size:18px; }
+
+      /* Footer */
+      .footer__links a { font-size:15px; }
+    }
+
+    /* ── 640px: large phone ── */
     @media(max-width:640px) {
-      .wrap { padding:0 24px; }
-      .hero__content { padding:0 24px; }
-      .hero__form { flex-direction:column; }
+      .wrap { padding:0 20px; }
+      .nav  { padding:14px 20px; }
+      .hero__content { padding:0 20px; }
+      .nav__badge { padding:7px 14px; font-size:10px; }
+
+      .section { padding:72px 0; }
+      .founder-section { padding:72px 0; }
+
+      /* Hero form stacks */
+      .hero__form  { flex-direction:column; max-width:100%; }
       .hero__input { border-right:1px solid rgba(255,255,255,.2); border-bottom:none; }
-      .section { padding:80px 0; }
-      .cta__form { flex-direction:column; }
-      .cta__input { border-right:1px solid rgba(155,122,80,.28); border-bottom:none; }
+      .hero__btn   { padding:16px 24px; }
+
+      /* Ticker gaps */
+      .ticker__inner { gap:28px; }
+
+      /* Shift */
+      .shift__before,
+      .shift__after { padding:24px 20px; gap:14px; }
+      .shift__before-text,
+      .shift__after-text { font-size:18px; }
+
+      /* Science */
+      .science__ghost { font-size:56px; }
+      .science__nm    { font-size:28px; }
+
+      /* Founder: tighter */
+      .founder-row { padding:44px 0; gap:20px; }
+      .founder-row__photo { gap:20px; }
+      .founder-row__circle { width:104px; height:104px; }
+      .founder-row__name   { font-size:28px; }
+      .founder-row__quote  { font-size:19px; }
+      .founder-row__body   { font-size:15px; }
+      .founders-stack { margin-top:52px; }
+
+      /* Standard: tighter */
+      .standard__item { grid-template-columns:52px 1fr; padding:32px 0; }
+      .standard__num  { font-size:40px; }
+      .standard__title { font-size:22px; }
+      .standard__text  { font-size:15px; }
+
+      /* Certs: smaller text */
+      .cert { font-size:9px; padding:7px 12px; }
+
+      /* Expect: full-bleed cards */
+      .expect__card { padding:36px 24px; }
+
+      /* CTA form stacks */
+      .cta__form   { flex-direction:column; max-width:100%; }
+      .cta__input  { border-right:1px solid rgba(155,122,80,.28); border-bottom:none; }
+      .cta__btn    { padding:18px 24px; }
+      .cta__pills  { gap:10px; }
+      .cta__pill   { font-size:10px; }
+
+      /* Footer */
+      .footer { padding:56px 0 36px; }
+      .footer__inner { gap:36px; padding-bottom:36px; }
+      .footer__svg   { width:120px; height:auto; }
+      .footer__links a { font-size:14px; }
     }
+
+    /* ── 480px: medium phone ── */
+    @media(max-width:480px) {
+      .wrap { padding:0 16px; }
+      .nav  { padding:12px 16px; }
+      .hero__content { padding:0 16px; }
+
+      .section { padding:60px 0; }
+      .founder-section { padding:60px 0; }
+      .section__title { font-size:clamp(32px, 9vw, 52px); }
+      .section__body  { font-size:17px; }
+
+      /* Hero */
+      .hero { padding-bottom:56px; }
+      .hero__h1   { font-size:clamp(44px, 13vw, 64px); }
+      .hero__sub  { font-size:16px; }
+      .hero__kicker { font-size:10px; letter-spacing:.16em; }
+      .hero__note { font-size:12px; }
+
+      /* Science */
+      .science__panel { padding:40px 24px; }
+
+      /* Founder: fully stacked, circle top-center */
+      .founder-row {
+        grid-template-columns:1fr;
+        padding:40px 0;
+        gap:24px;
+      }
+      .founder-row__photo {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+      .founder-row__circle { width:96px; height:96px; }
+      .founder-row__name   { font-size:26px; }
+      .founder-row__title  { font-size:9px; letter-spacing:.18em; }
+      .founder-row__quote  { font-size:17px; }
+      .founder-row__body   { font-size:14px; }
+
+      /* Standard */
+      .standard__item { grid-template-columns:44px 1fr; gap:0; padding:28px 0; }
+      .standard__num  { font-size:34px; }
+      .standard__title { font-size:20px; }
+
+      /* CTA */
+      .cta { padding:60px 0; }
+      .cta__h2  { font-size:clamp(30px, 10vw, 52px); }
+      .cta__sub { font-size:16px; }
+      .cta__eye { font-size:10px; gap:12px; }
+      .cta__eye::before, .cta__eye::after { width:28px; }
+
+      /* Expect */
+      .expect__card-title { font-size:22px; }
+
+      /* Nav badge: smaller on tiny screens */
+      .nav__badge { padding:6px 12px; font-size:9px; gap:6px; }
+      .nav__badge::before { width:6px; height:6px; }
+    }
+
+    /* ── 375px: iPhone SE / small phones ── */
+    @media(max-width:375px) {
+      .wrap { padding:0 14px; }
+      .hero__content { padding:0 14px; }
+      .hero__h1 { font-size:clamp(38px, 13vw, 52px); }
+      .section__title { font-size:clamp(28px, 10vw, 44px); }
+      .cta__h2 { font-size:clamp(26px, 11vw, 44px); }
+      .founder-row__name { font-size:24px; }
+      .standard__title { font-size:18px; }
+      /* Keep nav badge readable */
+      .nav__badge { display:none; }
+      /* Show a minimal dot indicator instead */
+      .nav::after {
+        content: "Coming 2026";
+        font-family:var(--sans); font-size:9px; letter-spacing:.12em;
+        text-transform:uppercase; color:rgba(255,255,255,.7);
+      }
+      .nav.scrolled::after { color:var(--ink-muted); }
+    }
+
   </style>
 </head>
 <body>
@@ -787,7 +1076,7 @@
         <div class="founder-row__content">
           <div class="founder-row__meta">
             <span class="founder-row__name">Vikas Bhatnagar</span>
-            <span class="founder-row__title">Co-Founder &amp; Strategic Director</span>
+            <span class="founder-row__title">Founder &amp; Strategic Director</span>
           </div>
           <p class="founder-row__body">With over two decades of leadership across strategic growth, market expansion, operational excellence, and global partnerships, Vikas brings a deeply grounded yet forward-thinking perspective to Mamori. Throughout his career, he has built and scaled businesses by fostering strong alliances, identifying emerging opportunities, and creating systems designed for sustainable growth.</p>
           <p class="founder-row__body">At Mamori, his vision is centred on building a brand with integrity, longevity, and purpose — combining business discipline with a genuine passion for introducing thoughtfully developed products that address real gaps in the Indian market. He believes in creating brands that earn long-term consumer trust through quality, relevance, and meaningful innovation.</p>
@@ -804,7 +1093,7 @@
         <div class="founder-row__content">
           <div class="founder-row__meta">
             <span class="founder-row__name">Akash Bhatnagar</span>
-            <span class="founder-row__title">Co-Founder &amp; Growth Director</span>
+            <span class="founder-row__title">Founder &amp; Growth Director</span>
           </div>
           <p class="founder-row__body">With a strong foundation across trade, distribution, marketing, and business operations, Akash brings an entrepreneurial mindset rooted in scale, adaptability, and long-term vision. Having worked across some of India's leading consumer and technology ecosystems, he understands not just how products are sold, but how markets evolve and what consumers truly seek from modern brands.</p>
           <p class="founder-row__body">At Mamori, his focus goes beyond business growth. He is deeply passionate about building products and experiences that feel relevant to Indian consumers — thoughtfully designed for their lifestyles, needs, and aspirations. Driven by innovation and a belief in creating value with purpose, he aims to help shape Mamori into a brand that delivers trust, quality, and meaningful impact.</p>
